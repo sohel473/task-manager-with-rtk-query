@@ -1,6 +1,6 @@
 import React from "react";
 import Projects from "./Projects";
-import Teams from "./Teams";
+import Team from "./Team";
 
 export default function Sidebar() {
   return (
@@ -10,7 +10,7 @@ export default function Sidebar() {
         <Projects />
 
         {/* <!-- Team Members --> */}
-        <Teams />
+        <Team />
       </div>
     </>
   );

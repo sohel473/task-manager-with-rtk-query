@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.svg";
 
 export default function Navbar() {
@@ -7,9 +8,9 @@ export default function Navbar() {
       <nav className="container relative py-3">
         <div className="flex items-center justify-between">
           {/* logo */}
-          <a href="/">
+          <Link to="/">
             <img src={logo} alt="logo" />
-          </a>
+          </Link>
 
           {/* search */}
           <div className="flex-1 max-w-xs search-field group">

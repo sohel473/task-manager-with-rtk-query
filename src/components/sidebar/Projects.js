@@ -1,59 +1,28 @@
 import React from "react";
+import { useGetProjectsQuery } from "../../features/api/apiSlice";
+import Project from "./Project";
 
 export default function Projects() {
+  const { data: projects, error, isLoading } = useGetProjectsQuery();
+
+  let content = null;
+
+  if (isLoading) {
+    content = <div>Loading...</div>;
+  } else if (error) {
+    content = <div>Error: {error}</div>;
+  } else if (projects) {
+    // console.log(projects);
+    content = projects.map((project) => (
+      <Project key={project.id} project={project} />
+    ));
+  }
+
   return (
     <>
       <div>
         <h3 className="text-xl font-bold">Projects</h3>
-        <div className="mt-3 space-y-4">
-          <div className="checkbox-container">
-            <input
-              type="checkbox"
-              className="color-scoreboard"
-              defaultChecked
-            />
-            <p className="label">Scoreboard</p>
-          </div>
-
-          <div className="checkbox-container">
-            <input
-              type="checkbox"
-              className="color-flight"
-              defaultChecked
-            />
-            <p className="label">Flight Booking</p>
-          </div>
-
-          <div className="checkbox-container">
-            <input
-              type="checkbox"
-              className="color-productCart"
-              defaultChecked
-            />
-            <p className="label">Product Cart</p>
-          </div>
-
-          <div className="checkbox-container">
-            <input
-              type="checkbox"
-              className="color-bookstore"
-              defaultChecked
-            />
-            <p className="label">Book Store</p>
-          </div>
-          <div className="checkbox-container">
-            <input type="checkbox" className="color-blog" defaultChecked />
-            <p className="label">Blog Application</p>
-          </div>
-          <div className="checkbox-container">
-            <input
-              type="checkbox"
-              className="color-jobFinder"
-              defaultChecked
-            />
-            <p className="label">Job Finder</p>
-          </div>
-        </div>
+        <div className="mt-3 space-y-4">{content}</div>
       </div>
     </>
   );
