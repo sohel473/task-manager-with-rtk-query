@@ -83,7 +83,7 @@
       },
       "deadline": "2023-03-15",
       "id": 1,
-      "status": "pending"
+      "status": "inProgress"
     },
     {
       "taskName": "Task Two",
@@ -99,7 +99,8 @@
       },
       "deadline": "2023-03-23",
       "id": 2,
-      "projectName": "Scoreboard"
+      "projectName": "Scoreboard",
+      "status": "pending"
     },
     {
       "taskName": "Task Three",
