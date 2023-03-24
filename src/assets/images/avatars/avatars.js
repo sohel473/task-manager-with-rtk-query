@@ -7,13 +7,13 @@ import ferdous from "./ferdous.png";
 import almas from "./almas.png";
 
 const avatars = {
-  "Sumit Saha": sumit,
-  "Sadh Hasan": sadh,
-  "Akash Ahmed": akash,
-  "Md Salahuddin": salahuddin,
-  "Riyadh Hassan": riyadh,
-  "Ferdous Hassan": ferdous,
-  "Arif Almas": almas,
+  "/images/avatars/sumit.png": sumit,
+  "/images/avatars/sadh.png": sadh,
+  "/images/avatars/akash.png": akash,
+  "/images/avatars/salahuddin.png": salahuddin,
+  "/images/avatars/riyadh.png": riyadh,
+  "/images/avatars/ferdous.png": ferdous,
+  "/images/avatars/almas.png": almas,
 };
 
 export default avatars;

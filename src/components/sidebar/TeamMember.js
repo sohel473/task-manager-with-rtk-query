@@ -2,8 +2,8 @@ import React from "react";
 import avatars from "../../assets/images/avatars/avatars";
 
 export default function TeamMember({ member }) {
-  const { name } = member;
-  const avatarSrc = avatars[name];
+  const { name, avatar } = member;
+  const avatarSrc = avatars[avatar];
 
   return (
     <>

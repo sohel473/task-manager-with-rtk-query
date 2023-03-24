@@ -1,30 +1,41 @@
 import React from "react";
-import ferdous from "../../assets/images/avatars/ferdous.png";
+import avatars from "../../assets/images/avatars/avatars";
+import formatDate from "../../utils/formateDate";
 
-export default function Task() {
+export default function Task({ task }) {
+  const { id, taskName, teamMember, project, deadline, status } = task;
+
+  const avatarSrc = avatars[teamMember.avatar];
+
+  // console.log(deadline);
+
+  const { day, month } = formatDate(deadline);
+
+  // console.log(day, month);
+
   return (
     <>
       <div className="lws-task">
         <div className="flex items-center gap-2 text-slate">
-          <h2 className="lws-date">26</h2>
-          <h4 className="lws-month">March</h4>
+          <h2 className="lws-date">{day}</h2>
+          <h4 className="lws-month">{month}</h4>
         </div>
 
         <div className="lws-taskContainer">
-          <h1 className="lws-task-title">Last over need 15 runs</h1>
-          <span className="lws-task-badge color-scoreboard">
-            Scoreboard
+          <h1 className="lws-task-title">{taskName}</h1>
+          <span className={`lws-task-badge ${project.colorClass}`}>
+            {project.projectName}
           </span>
         </div>
 
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <img
-              src={ferdous}
-              alt="Ferdous Hassan"
+              src={avatarSrc}
+              alt={teamMember.name}
               className="team-avater"
             />
-            <p className="lws-task-assignedOn">Ferdous Hassan</p>
+            <p className="lws-task-assignedOn">{teamMember.name}</p>
           </div>
           {/* <!-- delete button will not shown to the ui, until the status of the task will be completed --> */}
           <button className="lws-delete">
