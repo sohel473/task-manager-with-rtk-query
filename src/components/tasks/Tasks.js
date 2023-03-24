@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetTasksQuery } from "../../features/api/apiSlice";
+import { useGetTasksQuery } from "../../features/tasks/tasksApi";
 import Task from "./Task";
 
 export default function Tasks() {

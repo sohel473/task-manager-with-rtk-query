@@ -1,6 +1,6 @@
 import React from "react";
+import { useGetTeamMembersQuery } from "../../features/team/teamApi";
 import TeamMember from "./TeamMember";
-import { useGetTeamMembersQuery } from "../../features/api/apiSlice";
 
 export default function Team() {
   const { data: team, error, isLoading } = useGetTeamMembersQuery();

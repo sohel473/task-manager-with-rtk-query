@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetProjectsQuery } from "../../features/api/apiSlice";
+import { useGetProjectsQuery } from "../../features/projects/projectsApi";
 import Project from "./Project";
 
 export default function Projects() {

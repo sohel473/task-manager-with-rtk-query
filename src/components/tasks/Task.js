@@ -13,6 +13,8 @@ export default function Task({ task }) {
 
   // console.log(day, month);
 
+  console.log(status);
+
   return (
     <>
       <div className="lws-task">
