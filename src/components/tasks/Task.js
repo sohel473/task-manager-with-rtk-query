@@ -4,7 +4,8 @@ import { useUpdateTaskMutation } from "../../features/tasks/tasksApi";
 import formatDate from "../../utils/formateDate";
 
 export default function Task({ task }) {
-  const { id, taskName, teamMember, project, deadline, status } = task;
+  const { id, taskName, teamMember, project, deadline, status } =
+    task || {};
 
   const [localStatus, setLocalStatus] = useState(status);
 
@@ -16,7 +17,7 @@ export default function Task({ task }) {
 
   // console.log(day, month);
 
-  console.log(status);
+  // console.log(status);
 
   const [updateTask] = useUpdateTaskMutation();
 
@@ -31,6 +32,8 @@ export default function Task({ task }) {
     }
   };
 
+  console.log("Task object:", task);
+
   return (
     <>
       <div className="lws-task">
@@ -41,8 +44,8 @@ export default function Task({ task }) {
 
         <div className="lws-taskContainer">
           <h1 className="lws-task-title">{taskName}</h1>
-          <span className={`lws-task-badge ${project.colorClass}`}>
-            {project.projectName}
+          <span className={`lws-task-badge ${project?.colorClass}`}>
+            {project?.projectName}
           </span>
         </div>
 
@@ -50,10 +53,10 @@ export default function Task({ task }) {
           <div className="flex items-center gap-2">
             <img
               src={avatarSrc}
-              alt={teamMember.name}
+              alt={teamMember?.name}
               className="team-avater"
             />
-            <p className="lws-task-assignedOn">{teamMember.name}</p>
+            <p className="lws-task-assignedOn">{teamMember?.name}</p>
           </div>
           {/* <!-- delete button will not shown to the ui, until the status of the task will be completed --> */}
           {localStatus === "completed" && (
