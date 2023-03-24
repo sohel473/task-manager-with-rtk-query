@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import avatars from "../../assets/images/avatars/avatars";
+import { useUpdateTaskMutation } from "../../features/tasks/tasksApi";
 import formatDate from "../../utils/formateDate";
 
 export default function Task({ task }) {
   const { id, taskName, teamMember, project, deadline, status } = task;
+
+  const [localStatus, setLocalStatus] = useState(status);
 
   const avatarSrc = avatars[teamMember.avatar];
 
@@ -14,6 +17,19 @@ export default function Task({ task }) {
   // console.log(day, month);
 
   console.log(status);
+
+  const [updateTask] = useUpdateTaskMutation();
+
+  const handleStatusChange = async (e) => {
+    const newStatus = e.target.value;
+    const updatedTask = { ...task, status: newStatus };
+    try {
+      await updateTask(updatedTask).unwrap();
+      setLocalStatus(newStatus);
+    } catch (error) {
+      console.error("Failed to update task status:", error);
+    }
+  };
 
   return (
     <>
@@ -71,12 +87,14 @@ export default function Task({ task }) {
               />
             </svg>
           </button>
-          <select className="lws-status">
-            <option value="pending" defaultValue>
-              Pending
-            </option>
+          <select
+            className="lws-status"
+            value={localStatus}
+            onChange={handleStatusChange}
+          >
+            <option value="pending">Pending</option>
             <option value="inProgress">In Progress</option>
-            <option value="complete">Completed</option>
+            <option value="completed">Completed</option>
           </select>
         </div>
       </div>

@@ -83,7 +83,7 @@
       },
       "deadline": "2023-03-15",
       "id": 1,
-      "status": "inProgress"
+      "status": "pending"
     },
     {
       "taskName": "Task Two",
@@ -114,7 +114,8 @@
         "colorClass": "color-productCart"
       },
       "deadline": "2023-03-03",
-      "id": 3
+      "id": 3,
+      "status": "completed"
     },
     {
       "taskName": "New Task",
