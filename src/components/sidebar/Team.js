@@ -10,7 +10,7 @@ export default function Team() {
   if (isLoading) {
     content = <div>Loading...</div>;
   } else if (error) {
-    content = <div>Error: {error}</div>;
+    content = <div>Error: {error.error}</div>;
   } else if (team) {
     // console.log(team);
     content = team.map((member) => (

@@ -41,7 +41,7 @@ export default function Tasks() {
   if (isLoading) {
     content = <div>Loading...</div>;
   } else if (error) {
-    content = <div>{error}</div>;
+    content = <div>{error.error}</div>;
   } else if (filteredTasks.length === 0) {
     content = <div>No tasks found</div>;
   } else {

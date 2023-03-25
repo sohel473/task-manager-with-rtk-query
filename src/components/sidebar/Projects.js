@@ -20,7 +20,8 @@ export default function Projects() {
   if (isLoading) {
     content = <div>Loading...</div>;
   } else if (error) {
-    content = <div>Error: {error}</div>;
+    console.log("Error object:", error); // Log the error object
+    content = <div>Error: {error.error}</div>;
   } else if (projects) {
     // console.log(projects);
     content = projects.map((project) => (
