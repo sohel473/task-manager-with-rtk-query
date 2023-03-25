@@ -37,6 +37,40 @@ export const tasksApi = apiSlice.injectEndpoints({
         url: `/tasks/${id}`,
         method: "DELETE",
       }),
+      // optimistic update
+      async onQueryStarted(id, { dispatch, queryFulfilled, getState }) {
+        // optimistic update start
+        const previousTasks = apiSlice.endpoints.getTasks.select()(
+          getState()
+        ).data;
+        console.log("previousTasks:", previousTasks);
+
+        dispatch(
+          apiSlice.util.updateQueryData("getTasks", undefined, (draft) => {
+            // console.log("draft:", draft);
+            const filteredTasks = draft.filter((task) => task.id !== id);
+            return filteredTasks;
+          })
+        );
+        // optimistic update end
+
+        // actual delete start
+        try {
+          await queryFulfilled;
+        } catch (error) {
+          // actual delete end
+          // if delete fails, revert to previous state
+          dispatch(
+            tasksApi.util.updateQueryData(
+              "getTasks",
+              previousTasks,
+              () => {
+                return previousTasks;
+              }
+            )
+          );
+        }
+      },
     }),
   }),
 });

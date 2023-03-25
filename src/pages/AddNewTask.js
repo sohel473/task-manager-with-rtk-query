@@ -54,7 +54,7 @@ export default function AddNewTask() {
       deadline,
     };
 
-    console.log(newTask);
+    // console.log(newTask);
 
     try {
       await addTask(newTask).unwrap();

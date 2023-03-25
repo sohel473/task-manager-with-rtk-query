@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import avatars from "../../assets/images/avatars/avatars";
-import { useUpdateTaskMutation } from "../../features/tasks/tasksApi";
+import {
+  useDeleteTaskMutation,
+  useUpdateTaskMutation,
+} from "../../features/tasks/tasksApi";
 import formatDate from "../../utils/formateDate";
 
 export default function Task({ task }) {
@@ -32,7 +35,13 @@ export default function Task({ task }) {
     }
   };
 
-  console.log("Task object:", task);
+  // console.log("Task object:", task);
+
+  const [deleteTask] = useDeleteTaskMutation();
+
+  const handleDeleteTask = () => {
+    deleteTask(id);
+  };
 
   return (
     <>
@@ -60,7 +69,7 @@ export default function Task({ task }) {
           </div>
           {/* <!-- delete button will not shown to the ui, until the status of the task will be completed --> */}
           {localStatus === "completed" && (
-            <button className="lws-delete">
+            <button className="lws-delete" onClick={handleDeleteTask}>
               <svg
                 fill="none"
                 viewBox="0 0 24 24"
