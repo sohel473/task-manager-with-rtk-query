@@ -48,6 +48,29 @@ export const tasksApi = apiSlice.injectEndpoints({
         method: "PUT",
         body: updatedTask,
       }),
+      // Pessimistic update using onQueryStarted
+      async onQueryStarted(updatedTask, { dispatch, queryFulfilled }) {
+        try {
+          const result = await queryFulfilled;
+          dispatch(
+            tasksApi.util.updateQueryData(
+              "getTasks",
+              undefined,
+              (draft) => {
+                const taskIndex = draft.findIndex(
+                  (task) => task.id === updatedTask.id
+                );
+                if (taskIndex >= 0) {
+                  draft[taskIndex] = result.data;
+                }
+              }
+            )
+          );
+        } catch (error) {
+          console.error("Failed to update task:", error);
+        }
+      },
+      // pessimistic update end
     }),
     // delete a task
     deleteTask: builder.mutation({
@@ -62,7 +85,7 @@ export const tasksApi = apiSlice.injectEndpoints({
         const previousTasks = apiSlice.endpoints.getTasks.select()(
           getState()
         ).data;
-        console.log("previousTasks:", previousTasks);
+        // console.log("previousTasks:", previousTasks);
 
         dispatch(
           apiSlice.util.updateQueryData("getTasks", undefined, (draft) => {

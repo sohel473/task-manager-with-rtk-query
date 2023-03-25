@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import avatars from "../../assets/images/avatars/avatars";
 import {
   useDeleteTaskMutation,
@@ -7,6 +8,7 @@ import {
 import formatDate from "../../utils/formateDate";
 
 export default function Task({ task }) {
+  const navigate = useNavigate();
   const { id, taskName, teamMember, project, deadline, status } =
     task || {};
 
@@ -40,7 +42,13 @@ export default function Task({ task }) {
   const [deleteTask] = useDeleteTaskMutation();
 
   const handleDeleteTask = () => {
-    deleteTask(id);
+    if (window.confirm("Are you sure you want to delete this task?")) {
+      deleteTask(id);
+    }
+  };
+
+  const handleEditTask = () => {
+    navigate(`/editTask/${id}`);
   };
 
   return (
@@ -86,7 +94,7 @@ export default function Task({ task }) {
             </button>
           )}
           {localStatus !== "completed" && (
-            <button className="lws-edit">
+            <button className="lws-edit" onClick={handleEditTask}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

@@ -152,20 +152,20 @@
       "status": "completed"
     },
     {
-      "taskName": "Task Sohel",
+      "taskName": "Task Soheeel 420",
       "teamMember": {
-        "name": "Sumit Saha",
-        "avatar": "/images/avatars/sumit.png",
-        "id": 1
+        "name": "Sadh Hasan",
+        "avatar": "/images/avatars/sadh.png",
+        "id": 2
       },
       "project": {
-        "id": 1,
-        "projectName": "Scoreboard",
-        "colorClass": "color-scoreboard"
+        "id": 6,
+        "projectName": "Job Finder",
+        "colorClass": "color-jobFinder"
       },
-      "deadline": "2023-03-15",
-      "id": 6,
-      "status": "completed"
+      "deadline": "2023-03-28",
+      "id": 7,
+      "status": "inProgress"
     }
   ]
 }
