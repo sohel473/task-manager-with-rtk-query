@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useGetProjectsQuery } from "../features/projects/projectsApi";
 import { useAddTaskMutation } from "../features/tasks/tasksApi";
 import { useGetTeamMembersQuery } from "../features/team/teamApi";
@@ -10,6 +11,8 @@ export default function AddNewTask() {
   const [deadline, setDeadline] = useState("");
 
   const [addTask, { isLoading }] = useAddTaskMutation();
+
+  const navigate = useNavigate();
 
   const {
     data: teamMembersData,
@@ -63,6 +66,8 @@ export default function AddNewTask() {
       setTeamMember("");
       setProjectName("");
       setDeadline("");
+
+      navigate("/tasks");
     } catch (error) {
       console.error("Failed to add task:", error);
     }

@@ -20,6 +20,25 @@ export const tasksApi = apiSlice.injectEndpoints({
         method: "POST",
         body: newTask,
       }),
+      // Pessimistic update using onQueryStarted
+      async onQueryStarted(newTask, { dispatch, queryFulfilled }) {
+        try {
+          const result = await queryFulfilled;
+          dispatch(
+            tasksApi.util.updateQueryData(
+              "getTasks",
+              undefined,
+              (draft) => {
+                draft.push(result.data);
+              }
+            )
+          );
+        } catch (error) {
+          console.error("Failed to add task:", error);
+        }
+      },
+
+      // pessimistic update end
     }),
     // update a task
     updateTask: builder.mutation({
