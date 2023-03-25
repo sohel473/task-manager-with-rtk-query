@@ -7,6 +7,16 @@ export default function Tasks() {
   const { data: tasks, isLoading, error } = useGetTasksQuery();
 
   const projects = useSelector((state) => state.projects.projects);
+  const searchResults = useSelector((state) => state.search.searchResults);
+
+  const searchFilter = (task) => {
+    const searchLowerCase = searchResults.toLowerCase();
+    return (
+      task.taskName.toLowerCase().includes(searchLowerCase) ||
+      task.teamMember.name.toLowerCase().includes(searchLowerCase) ||
+      task.project.projectName.toLowerCase().includes(searchLowerCase)
+    );
+  };
 
   // console.log(projects);
 
@@ -15,7 +25,11 @@ export default function Tasks() {
   // console.log(selectedProjectIds);
 
   const filteredTasks = tasks
-    ? tasks.filter((task) => selectedProjectIds.includes(task.project.id))
+    ? tasks.filter(
+        (task) =>
+          selectedProjectIds.includes(task.project.id) &&
+          searchFilter(task)
+      )
     : [];
 
   // console.log("Tasks:", tasks);

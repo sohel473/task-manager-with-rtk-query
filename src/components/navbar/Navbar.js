@@ -1,8 +1,16 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.svg";
+import { setSearchResults } from "../../features/search/searchSlice";
 
 export default function Navbar() {
+  const dispatch = useDispatch();
+
+  const handleSearch = (e) => {
+    dispatch(setSearchResults(e.target.value));
+  };
+
   return (
     <>
       <nav className="container relative py-3">
@@ -20,6 +28,7 @@ export default function Navbar() {
               placeholder="Search Task, Project, Team Member"
               className="search-input"
               id="lws-searchTask"
+              onChange={handleSearch}
             />
           </div>
         </div>
