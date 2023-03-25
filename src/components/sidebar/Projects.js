@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useGetProjectsQuery } from "../../features/projects/projectsApi";
+import { addProject } from "../../features/projects/projectSlice";
 import Project from "./Project";
 
 export default function Projects() {
   const { data: projects, error, isLoading } = useGetProjectsQuery();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (projects) {
+      dispatch(addProject(projects));
+    }
+  }, [projects, dispatch]);
 
   let content = null;
 

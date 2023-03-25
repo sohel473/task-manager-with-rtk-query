@@ -11,7 +11,11 @@ const projectSlice = createSlice({
     // action creators
     // action creator for adding a project
     addProject(state, action) {
-      state.projects.push(action.payload);
+      if (Array.isArray(action.payload)) {
+        state.projects.push(...action.payload);
+      } else {
+        state.projects.push(action.payload);
+      }
     },
     removeProject(state, action) {
       state.projects = state.projects.filter(
@@ -22,3 +26,4 @@ const projectSlice = createSlice({
 });
 
 export const { addProject, removeProject } = projectSlice.actions;
+export default projectSlice.reducer;
